@@ -17,7 +17,7 @@ def sample_responses(input_text):
     user_message = str(input_text).lower()
 
     if "semak status" in input_text:
-            message =f"""Sila anda masukkan nombor Kad Pengenalan and nombor Telefon anda dengan format berikut:\n\nContoh: 990506106144-0123324567"""
+            message =f"""Sila anda masukkan Nombor Kad Pengenalan and Nombor Telefon anda dengan format berikut:\n\nContoh: 990506106144-0123324567"""
             return message
 
     if "tujuan pkob" in input_text:
