@@ -1,6 +1,8 @@
 import logging
 import os
 from datetime import datetime, timedelta
+
+import telegram
 from telegram import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 
 import psycopg2
@@ -48,7 +50,7 @@ def help_command (update, context) :
 def start(update: Update, context: CallbackContext):
     buttons = [[KeyboardButton(victim)], [KeyboardButton(about)]]
     update.message.reply_text(
-        f"""Hi {update['message']['chat']['first_name']}, Selamat datang ke PKOB_HelloWorld_Bot.\nAnda boleh dapatkan maklumat melalui pilihan yang disediakan:\n\n1.Masukkan "semak status" untuk menyemak status permohonan. \n\n2.Masukkan "tujuan pkob" untuk mengetahui maksud Pusat Kawalan Operasi Bencana (PKOB). """, reply_markup=ReplyKeyboardMarkup(buttons))
+        f"""Hi {update['message']['chat']['first_name']}, Selamat datang ke PKOB HelloWorld Bot.\nAnda boleh dapatkan maklumat melalui pilihan yang disediakan:\n\n1.Masukkan *"semak status"* untuk menyemak status permohonan. \n\n2.Masukkan *"tujuan pkob"* untuk mengetahui maksud Pusat Kawalan Operasi Bencana (PKOB). """, reply_markup=ReplyKeyboardMarkup(buttons), parse_mode=telegram.ParseMode.MARKDOWN)
 
 def daftar_command(update: Update, context: CallbackContext):
     update.message.reply_text(
@@ -82,7 +84,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo. Telefon: {str(x[3])} \nStatus: Bantuan Telah Diterima""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \n*Nama:* {str(x[2])} \n*Umur:* {str(ageYears)} \n*No. Kad Pengenalan:* {str(x[4])} \n*No. Telefon:* {str(x[3])} \n*Status:* Bantuan Telah Diterima""", parse_mode=telegram.ParseMode.MARKDOWN)
 
 
         cursor.close()
@@ -104,7 +106,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo. Telefon: {str(x[3])} \nStatus: Pendaftaran Teleh Diterima""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \n*Nama:* {str(x[2])} \n*Umur:* {str(ageYears)} \n*No. Kad Pengenalan:* {str(x[4])} \n*No. Telefon:* {str(x[3])} \n*Status:* Pendaftaran Teleh Diterima""", parse_mode=telegram.ParseMode.MARKDOWN)
 
     if result ==[]:
         conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
@@ -123,7 +125,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo. Telefon: {str(x[3])} \nStatus: Pendaftaran Sedang Diproses""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \n*Nama:* {str(x[2])} \n*Umur:* {str(ageYears)} \n*No. Kad Pengenalan:* {str(x[4])} \n*No. Telefon:* {str(x[3])} \n*Status:* Pendaftaran Sedang Diproses""", parse_mode=telegram.ParseMode.MARKDOWN)
 
     if result ==[]:
         conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
@@ -142,7 +144,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo. Telefon: {str(x[3])} \nStatus: Pendaftaran Telah Ditolak""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \n*Nama:* {str(x[2])} \n*Umur:* {str(ageYears)} \n*No. Kad Pengenalan:* {str(x[4])} \n*No. Telefon:* {str(x[3])} \n*Status:* Pendaftaran Telah Ditolak""", parse_mode=telegram.ParseMode.MARKDOWN)
     if result ==[]:
         update.message.reply_text(
             f"""Hi {update['message']['chat']['first_name']}, maklumat anda tidak didapati, anda boleh daftarkan bantuan mangsa di laman web berikut:\n\nhttps://pkobsystemhelloworld.herokuapp.com/pkob/request/""")
