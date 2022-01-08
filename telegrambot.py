@@ -48,7 +48,7 @@ def help_command (update, context) :
 def start(update: Update, context: CallbackContext):
     buttons = [[KeyboardButton(victim)], [KeyboardButton(about)]]
     update.message.reply_text(
-        f"""Hi {update['message']['chat']['first_name']},Selamat datang ke PKOB_HelloWorld_Bot.\nAnda boleh dapatkan maklumat melalui pilihan yang disediakan:\n\n1.Masukkan "semakkan status permohonan" untuk menyemakkan status permohonan. \n\n2.Masukkan "mengetahukan tujuan pkob" untuk mengetahi maksud Pusat Kawalan Operasi Bencana (PKOB). """, reply_markup=ReplyKeyboardMarkup(buttons))
+        f"""Hi {update['message']['chat']['first_name']},Selamat datang ke PKOB_HelloWorld_Bot.\nAnda boleh dapatkan maklumat melalui pilihan yang disediakan:\n\n1.Masukkan "semak status" untuk menyemakkan status permohonan. \n\n2.Masukkan "tujuan pkob" untuk mengetahi maksud Pusat Kawalan Operasi Bencana (PKOB). """, reply_markup=ReplyKeyboardMarkup(buttons))
 
 def daftar_command(update: Update, context: CallbackContext):
     update.message.reply_text(
