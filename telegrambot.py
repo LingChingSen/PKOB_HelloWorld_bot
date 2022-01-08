@@ -16,9 +16,8 @@ import re
 
 print('Bot started')
 
-victim = "semakkan status permohonan"
-about = "mengetahukan tujuan pkob"
-web = "pendaftaran bantuan mangsa"
+victim = "semak status"
+about = "tujuan pkob"
 
 def isValidIC(ic_no):
     regex = "(([[0-9]{2})(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01]))([0-9]{2})([0-9]{4})";
@@ -47,9 +46,9 @@ def help_command (update, context) :
 
 
 def start(update: Update, context: CallbackContext):
-    buttons = [[KeyboardButton(web)], [KeyboardButton(victim)], [KeyboardButton(about)]]
+    buttons = [[KeyboardButton(victim)], [KeyboardButton(about)]]
     update.message.reply_text(
-        f"""Hi {update['message']['chat']['first_name']},Selamat datang ke PKOB_HelloWorld_Bot.\n\nAnda boleh dapatkan maklumat melalui pilihan yang disediakan:\n1.Masukkan "pendaftaran bantuan mangsa" untuk daftar sebagai mangsa bencana. \n\n2.Masukkan "semakkan status permohonan" untuk menyemakkan status permohonan. \n\n3.Masukkan "mengetahukan tujuan pkob" untuk mengetahi maksud Pusat Kawalan Operasi Bencana (PKOB). """, reply_markup=ReplyKeyboardMarkup(buttons))
+        f"""Hi {update['message']['chat']['first_name']},Selamat datang ke PKOB_HelloWorld_Bot.\nAnda boleh dapatkan maklumat melalui pilihan yang disediakan:\n\n1.Masukkan "semakkan status permohonan" untuk menyemakkan status permohonan. \n\n2.Masukkan "mengetahukan tujuan pkob" untuk mengetahi maksud Pusat Kawalan Operasi Bencana (PKOB). """, reply_markup=ReplyKeyboardMarkup(buttons))
 
 def daftar_command(update: Update, context: CallbackContext):
     update.message.reply_text(
@@ -68,28 +67,6 @@ def handle_message(update: Update, context: CallbackContext):
     if isValidIC(ic_no) and isValidPhone(phone_no):
         conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM \"App_PKOB_request\" WHERE ic_no = '{}' and \"phone_no\" = '{}'".format(ic_no,phone_no))
-        conn.commit()
-        result = cursor.fetchall()
-        print(result)
-
-        for x in result:
-            birthday = str(x[4])[:6]
-            date_time_obj = datetime.strptime(birthday, '%y%m%d')
-            if date_time_obj > datetime.now():
-                date_time_obj -= timedelta(weeks=5124, days=2)
-            age = datetime.now() - date_time_obj
-            ageYears = int(age.days / 365)
-
-            update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']},berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. MyKad: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Permohonan: Permohonan Sedang Diproses""")
-
-
-        cursor.close()
-
-    if result ==[]:
-        conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
-        cursor = conn.cursor()
         cursor.execute("SELECT * FROM \"App_PKOB_victim\" WHERE ic_no = '{}' and \"phone_no\" = '{}'".format(ic_no,phone_no))
         conn.commit()
         result = cursor.fetchall()
@@ -104,7 +81,29 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']},berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. MyKad: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Permohonan: Permohonan Sedang Diproses""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Teleh Diterima""")
+
+
+        cursor.close()
+
+    if result ==[]:
+        conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM \"App_PKOB_request\" WHERE ic_no = '{}' and \"phone_no\" = '{}'".format(ic_no,phone_no))
+        conn.commit()
+        result = cursor.fetchall()
+        print(result)
+
+        for x in result:
+            birthday = str(x[4])[:6]
+            date_time_obj = datetime.strptime(birthday, '%y%m%d')
+            if date_time_obj > datetime.now():
+                date_time_obj -= timedelta(weeks=5124, days=2)
+            age = datetime.now() - date_time_obj
+            ageYears = int(age.days / 365)
+
+            update.message.reply_text(
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Sedang Diproses""")
 
     if result ==[]:
         conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
@@ -123,7 +122,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']},berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. MyKad: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Permohonan: Permohonan Ditolak """)
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Telah Ditolak""")
 
     if result ==[]:
         conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
@@ -142,10 +141,10 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']},berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. MyKad: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Permohonan: Permohonan Diterima """)
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Bantuan: Bnatuan Telah Diterima""")
     if result ==[]:
         update.message.reply_text(
-            f"""Hi {update['message']['chat']['first_name']} maklumat anda tidak dapati,anda boleh daftarkan bantuan mangsa di laman web berikut:\nhttps://pkobsystemhelloworld.herokuapp.com/pkob/request/""")
+            f"""Hi {update['message']['chat']['first_name']}, maklumat anda tidak didapati, anda boleh daftarkan bantuan mangsa di laman web berikut:\n\nhttps://pkobsystemhelloworld.herokuapp.com/pkob/request/""")
 
 if __name__ == '__main__':
     updater = Updater(TOKEN, use_context=True)
