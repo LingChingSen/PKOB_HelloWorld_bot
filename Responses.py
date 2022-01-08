@@ -17,11 +17,11 @@ def sample_responses(input_text):
     user_message = str(input_text).lower()
 
     if "semak status" in input_text:
-            message =f"""Sila anda masukkan Nombor Kad Pengenalan and Nombor Telefon anda dengan format berikut:\n\nContoh: 990506106144-0123324567"""
+            message =f"""Sila masukkan Nombor Kad Pengenalan and Nombor Telefon anda dengan format berikut:\n\nContoh: 990506106144-0123324567"""
             return message
 
     if "tujuan pkob" in input_text:
-            message ="Pusat Kawalan Operasi Bencana (PKOB) dibangunkan untuk mangsa yang mengalami bencana banjir di kampung Mukim Bujang Merbok, Kedah, yang menghadapi masalah seperti kerosakan harta benda atau kemerosotan keadaan kesihatan. \n\nPengguna sistem termasuk mangsa banjir yang boleh membuat permohonan bantuan material atau kewangan untuk mendapatkan barangan atau pembiayaan melalui sistem web PKOB dan Penghulu Kampung yang menguruskan senarai nama dan kebajikan pengedaran melalui sistem tersebut."
+            message ="Pusat Kawalan Operasi Bencana (PKOB) dibangunkan untuk mangsa yang mengalami bencana di kampung Mukim Bujang Merbok, Kedah, yang menghadapi masalah seperti kerosakan harta benda atau kemerosotan keadaan kesihatan. \n\nPengguna sistem termasuk mangsa bencana yang boleh membuat permohonan bantuan material atau kewangan untuk mendapatkan barangan atau pembiayaan melalui sistem web PKOB dan Penghulu Kampung yang menguruskan senarai nama dan kebajikan pengedaran melalui sistem tersebut."
             return message
 
     if"-"in input_text:

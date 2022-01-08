@@ -81,7 +81,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Teleh Diterima""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo. Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Teleh Diterima""")
 
 
         cursor.close()
@@ -103,7 +103,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Sedang Diproses""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo. Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Sedang Diproses""")
 
     if result ==[]:
         conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
@@ -122,7 +122,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Telah Ditolak""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo. Telefon: {str(x[3])} \nStatus Pendaftaran: Pendaftaran Telah Ditolak""")
 
     if result ==[]:
         conn = psycopg2.connect("postgres://bxuslnuwrasaoh:8122a2b9eaba94ec6b190c3166df75127e1e84049ce88c3fb9d8b2c22e64eaa7@ec2-35-169-119-56.compute-1.amazonaws.com:5432/d6m5mc61mh1dfj")
@@ -141,7 +141,7 @@ def handle_message(update: Update, context: CallbackContext):
             ageYears = int(age.days / 365)
 
             update.message.reply_text(
-                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo.Telefon: {str(x[3])} \nStatus Bantuan: Bnatuan Telah Diterima""")
+                         f"""Hi {update['message']['chat']['first_name']}, berikut adalah maklumat anda: \n \nNama: {str(x[2])} \nUmur: {str(ageYears)} \nNo. Kad Pengenalan: {str(x[4])} \nNo. Telefon: {str(x[3])} \nStatus Bantuan: Bantuan Telah Diterima""")
     if result ==[]:
         update.message.reply_text(
             f"""Hi {update['message']['chat']['first_name']}, maklumat anda tidak didapati, anda boleh daftarkan bantuan mangsa di laman web berikut:\n\nhttps://pkobsystemhelloworld.herokuapp.com/pkob/request/""")
